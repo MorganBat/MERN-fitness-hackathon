@@ -1,3 +1,3 @@
-# MERN-fitness-hackathon
+# fitr
 
-MERN app built to track workouts.
+MERN app built to track workouts. Built by Morgan Batterham and Gary Ho.
