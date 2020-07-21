@@ -5,3 +5,30 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+for i in 1..5 do
+    User.create(
+        name: Faker::Name.first_name,
+    )
+
+    puts "Created user #{i}"
+end
+
+for user in User.all
+    5.times do
+        user.workouts.create(
+            date: DateTime.new(2019, rand(1..12), 1+rand(1..28)),
+            exercises: "Test Exercises",
+        )
+        puts "workout created"
+    end
+end
+
+# for i in 1..30 do
+#     Workout.create(
+#         date: DateTime.new(2019, rand(1..12), 1+rand(1..28)),
+#         exercises: "Test Exercises",
+#     )
+
+#     puts "Created workout #{i}"
+# end
