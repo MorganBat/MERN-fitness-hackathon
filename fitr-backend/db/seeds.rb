@@ -22,7 +22,6 @@ for user in User.all
             date: DateTime.new(2019, rand(1..12), 1+rand(1..28)),
             exercises: "Test Exercises",
         )
-        puts "workout created"
     end
 end
 
