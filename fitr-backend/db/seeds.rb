@@ -9,6 +9,8 @@
 for i in 1..5 do
     User.create(
         name: Faker::Name.first_name,
+        email: "test#{i}@gmail.com"
+        password: "test#{i}"
     )
 
     puts "Created user #{i}"
