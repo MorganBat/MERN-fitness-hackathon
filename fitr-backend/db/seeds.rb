@@ -9,6 +9,8 @@
 for i in 1..5 do
     User.create(
         name: Faker::Name.first_name,
+        email: "test#{i}@gmail.com",
+        password: "test#{i}"
     )
 
     puts "Created user #{i}"
@@ -20,7 +22,6 @@ for user in User.all
             date: DateTime.new(2019, rand(1..12), 1+rand(1..28)),
             exercises: "Test Exercises",
         )
-        puts "workout created"
     end
 end
 
