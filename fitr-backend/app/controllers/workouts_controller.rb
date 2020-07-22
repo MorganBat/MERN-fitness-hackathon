@@ -1,10 +1,11 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :update, :destroy]
   before_action :authenticate_user
+  before_action :set_user, only: [:index, :create]
 
   # GET /workouts
   def index
-    @workouts = Workout.all
+    @workouts = Workout.where(user_id: @user) 
 
     render json: @workouts
   end
@@ -48,5 +49,9 @@ class WorkoutsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def workout_params
       params.require(:workout).permit(:exercises, :date, :user)
+    end
+
+    def set_user
+      @user = params[:id]
     end
 end
