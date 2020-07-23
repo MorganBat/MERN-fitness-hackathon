@@ -82,4 +82,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Heroku config fix
+  # Rails.application.routes.default_url_options = { host: "https://fitr-backend.herokuapp.com" }
 end
