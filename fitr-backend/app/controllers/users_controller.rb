@@ -1,17 +1,22 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  before_action :authenticate_user, only: [:index, :show, :update, :destroy]
+  before_action :authenticate_user, only: [:show, :update, :destroy]
 
   # GET /users
   def index
-    @users = User.all
-
-    render json: @users
+    # Send a HTTP 401 'unauthorised'
+    head 401
   end
 
   # GET /users/1
   def show
-    render json: @user
+    # Only allows the current user to access their own data
+    if @user.id == current_user.id
+      render json: @user
+    else
+      # Sends a HTTP 401 'unathorised'
+      head 401
+    end
   end
 
   # POST /users
@@ -27,16 +32,28 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
+    # Only allows the current user to modify their own
+    if @user.id == current_user.id
+      if @user.update(user_params)
+        render json: @user
+      else
+        render json: @user.errors, status: :unprocessable_entity
+      end
     else
-      render json: @user.errors, status: :unprocessable_entity
+      # Sends a HTTP 401 'unathorised'
+      head 401
     end
   end
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    # Only allows the current user to delete their own account
+    if @user.id == current_user.id
+      @user.destroy
+    else
+      # Sends a HTTP 401 'unathorised'
+      head 401
+    end
   end
 
   private
