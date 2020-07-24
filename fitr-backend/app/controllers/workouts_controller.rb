@@ -1,10 +1,10 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :update, :destroy]
   before_action :authenticate_user
-  before_action :set_user, only: [:index, :create]
 
   # GET /workouts
   def index
+    # Index accesses all of the current user's workouts rather than every workout
     @workouts = current_user.workouts
     # @workouts = Workout.all
 
@@ -13,7 +13,13 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts/1
   def show
-    render json: @workout
+    # Only allows the current user to access their own workouts
+    if @workout.user_id == current_user.id
+      render json: @workout
+    else
+      # Sends a HTTP 401 'unathorised'
+      head 401
+    end
   end
 
   # POST /workouts
@@ -29,16 +35,28 @@ class WorkoutsController < ApplicationController
 
   # PATCH/PUT /workouts/1
   def update
-    if @workout.update(workout_params)
-      render json: @workout
+    # Only allows a user to modify their own workouts
+    if @workout.user_id == current_user.id
+      if @workout.update(workout_params)
+        render json: @workout
+      else
+        render json: @workout.errors, status: :unprocessable_entity
+      end
     else
-      render json: @workout.errors, status: :unprocessable_entity
+      # Sends a HTTP 401 'unauthorised'
+      head 401
     end
   end
 
   # DELETE /workouts/1
   def destroy
-    @workout.destroy
+    # Only allows a user to delete their own workouts
+    if @workout.user_id == current_user.id
+      @workout.destroy
+    else
+      # Sends a HTTP 401 'unauthorised'
+       head 401
+    end
   end
 
   private
@@ -52,7 +70,4 @@ class WorkoutsController < ApplicationController
       params.require(:workout).permit(:exercises, :date, :user)
     end
 
-    def set_user
-      @user = params[:id]
-    end
 end
