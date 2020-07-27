@@ -2,6 +2,8 @@
 
 Rails and React app built to track workouts. Built by Morgan Batterham and Gary Ho.
 
+## Libraries used
+
 ## ERD
 
 ![Entity Relationship Diagram](docs/fitr-erd.png)
