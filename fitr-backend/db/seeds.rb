@@ -19,8 +19,12 @@ end
 for user in User.all
     5.times do
         user.workouts.create(
-            date: DateTime.new(2019, rand(1..12), 1+rand(1..28)),
-            exercises: "Test Exercises",
+            date: DateTime.new(2019, rand(1..12), rand(1..28)),
+            exercises: {
+                        "bench": [[10, 100],[10, 100],[10, 100],[10, 100],[10, 100]],
+                        "curl": [[10, 100],[10, 100],[10, 100],[10, 100],[10, 100]],
+                        "squat": [[10, 100],[10, 100],[10, 100],[10, 100],[10, 100]]
+                    }
         )
     end
 end
