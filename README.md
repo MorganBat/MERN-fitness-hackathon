@@ -19,3 +19,11 @@ Rails and React app built to track workouts. Built by Morgan Batterham and Gary 
 #### End of Day 3
 
 ![End of Day 3](docs/kanban3.png)
+
+#### End of Day 4
+
+![End of Day 4](docs/kanban4.png)
+
+#### End of Day 5
+
+![End of Day 5](docs/kanban5.png)
