@@ -17,7 +17,7 @@ class WorkoutsController < ApplicationController
     if @workout.user_id == current_user.id
       render json: @workout
     else
-      # Sends a HTTP 401 'unathorised'
+      # Sends a HTTP 401 'unauthorised'
       head 401
     end
   end

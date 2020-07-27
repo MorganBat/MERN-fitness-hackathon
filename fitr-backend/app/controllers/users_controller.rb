@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    # Send a HTTP 401 'unauthorised'
-    head 401
+    # Send a HTTP 403 'Forbidden'
+    head 403
   end
 
   # GET /users/1
