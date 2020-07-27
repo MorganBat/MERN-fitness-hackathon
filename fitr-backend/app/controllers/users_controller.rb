@@ -51,7 +51,7 @@ class UsersController < ApplicationController
     if @user.id == current_user.id
       @user.destroy
     else
-      # Sends a HTTP 401 'unathorised'
+      # Sends a HTTP 401 'unauthorised'
       head 401
     end
   end
