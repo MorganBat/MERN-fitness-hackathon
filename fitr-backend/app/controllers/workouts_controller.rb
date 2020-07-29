@@ -16,6 +16,7 @@ class WorkoutsController < ApplicationController
     # Only allows the current user to access their own workouts
     if @workout.user_id == current_user.id
       render json: @workout
+      puts @workout.exercises
     else
       # Sends a HTTP 401 'unauthorised'
       head 401
@@ -24,7 +25,7 @@ class WorkoutsController < ApplicationController
 
   # POST /workouts
   def create
-    @workout = Workout.new(workout_params)
+    @workout = current_user.workouts.create(workout_params)
 
     if @workout.save
       render json: @workout, status: :created, location: @workout
